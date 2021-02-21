@@ -98,7 +98,7 @@ async def photo_processing(message):
         await message.answer(text='Wonderful! The style image is received.'
                                   'You can use the /back command to '
                                   'change the style image. '
-                                  'Click /transfer to get the output pic.')
+                                  'Click /transfer to get the output pic and wait a few minutes...')
         flag = True
         style_flag = True  # Now the bot knows that the style image exists.
 
@@ -120,20 +120,14 @@ async def photo_processing(message: types.Message):
         style_flag = False
         await message.answer(text='Send a style image again, please.')
 
-flag_final = True
 
 @dp.message_handler(commands=['transfer'])
 async def contin(message: types.Message):
-
-    global flag_final
         
     # Let's make sure that the user has added both images.
     if not (content_flag * style_flag):  # Conjunction
         await message.answer(text="Send the pics again, please.")
         return
-    if flag_final:
-        await message.answer(text='Please wait a few minutes... The tranfer has begun!')
-        flag_final = False
     
     style_img = image_loader('style.jpg')
     content_img = image_loader('content.jpg')
@@ -142,23 +136,15 @@ async def contin(message: types.Message):
                                      content_img, style_img, input_img)
     tensor_save_rgbimage(output.data[0], 'result.jpg')
 
-    # Clear the RAM.
     with open('result.jpg', 'rb') as file:
         await message.answer_photo(file, caption='Great! This is the pic with the transferred style!')
+    
     del style_img
     del content_img
     del input_img
     del output
     torch.cuda.empty_cache()
 
-
-@dp.message_handler(lambda message: message.text in ("Great! This is the pic with the transferred style!"))
-async def processing(message: types.Message):
-    
-    global flag_final
-    
-    if not flag_final:
-        flag_final = True
 
 async def on_startup(dp):
     # insert code here to run it after start]
