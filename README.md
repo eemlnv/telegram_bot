@@ -5,3 +5,6 @@ This bot is got two pics and transfers the style of the second pic to the first 
 ![Image alt](https://github.com/eemlnv/telegram_bot/tree/main/screenshots/1.PNG)
 
 ![alt text](https://github.com/[eemlnv]/[telegram_bot]/tree/main/[screenshots]/1.PNG?raw=true)
+
+
+<img src="https://github.com/eemlnv/telegram_bot/blob/master/screenshots/1.png">
