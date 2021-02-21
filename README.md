@@ -8,3 +8,5 @@ This bot is got two pics and transfers the style of the second pic to the first 
 
 
 <img src="https://github.com/eemlnv/telegram_bot/screenshots/1.PNG">
+
+<img src="1.png" width="700"/>
